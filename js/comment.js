@@ -316,10 +316,10 @@ $(document).on('click','.recording', function(){
                             <span class="milisec">00</span>
                             </div>
                             <div class="recorder-record-btn">
-                                <input onclick="startRecording()" type="button" class="btn btn-primary" value="Record" />
+                                <input onclick="startReRecording(this)" type="button" class="btn btn-primary" value="Re-Record" />
                             </div>
                             <div class="recorder-stop-record-btn">
-                                <input onclick="stopRecording()" type="button" class="btn btn-primary" value="Stop" data-dismiss="modal">
+                                <input onclick="stopReRecording(this)" type="button" class="btn btn-primary replyRecord" data-dismiss="modal" value="Stop" data-replyId="" />
                             </div>
                                 <!-- <input onclick="stopRecording()" type="button" class="btn btn-primary" data-dismiss="modal" value="Stop" /> -->
                                 <div class="modal-close-btn" data-dismiss="modal" onclick="stopRecording()">X</div>

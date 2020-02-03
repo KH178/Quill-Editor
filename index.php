@@ -62,7 +62,7 @@
 			</div>
 		</div>
 
-    <div id="myModal" class="modal fade" role="dialog">
+    <div id="myModal" class="modal model-container fade" role="dialog">
       <div class="vertical-alignment-helper">
         <div class="modal-dialog vertical-align-center" role="document">
          <!-- Modal content-->
@@ -90,7 +90,7 @@
     </div>  
 
     <!--------- REply --->
-    <div id="myModal1" class="modal fade" role="dialog">
+    <div id="myModal1" class="modal fade model-container" role="dialog">
         
     </div>
     
@@ -167,7 +167,10 @@
 }
 
 $('#myModal').on('hidden.bs.modal', function () {
-  stopRecording();
+  stopRecording(this);
+});
+$('#myModal1').on('hidden.bs.modal', function () {
+  stopReRecording(this);
 });
 	// Recorder
 var onFail = function(e) {
@@ -188,7 +191,7 @@ var audio = document.querySelector('audio');
 // let timer = 0;
 let intervalTimer;
 function startRecording() {
-  let id = $(event.target).closest('.modal').attr('id');
+  let id = $(event.target).closest('.model-container').attr('id');
   $(event.target).closest('.modal');
   console.log($(event.target).closest('.modal').attr('id'));
   start($(event.target).closest('.modal').attr('id'));
@@ -205,10 +208,9 @@ function startRecording() {
   $(`#${id}`).find('.recorder-record-btn').css('display','none');
 }
 
-function stopRecording() {
-  let id = $(event.target).closest('.modal').attr('id');
-  console.log($(event.target).closest('.modal').attr('id'));
-  stop($(event.target).closest('.modal').attr('id'));
+function stopRecording(e) {
+  let id = $(e).attr('id');
+  stop(id);
   
   $(`#${id}`).find('.recorder-stop-record-btn').css('display','none');
   $(`#${id}`).find('.sub').css('display','block');
@@ -250,6 +252,14 @@ function stopRecording() {
 function startReRecording(recordId) {
   var index = $(recordId).parent().data('recordingid');
   var entity = $(recordId).parent().data('entity');
+  let id = $(recordId).closest('.model-container').attr('id');
+  console.log(id);
+  start(id)
+  
+  $(`#${id}`).find('.recorder-stop-record-btn').css('display','block');
+  $(`#${id}`).find('.sub1').css('display','block');
+  $(`#${id}`).find('.sub').css('display','none');
+  $(`#${id}`).find('.recorder-record-btn').css('display','none');
   if(entity=='comment'){
     var selected_range = comments[index].range; 
   }
@@ -268,6 +278,7 @@ function startReRecording(recordId) {
 function stopReRecording(recordId){
   var index = $(recordId).parent().data('recordingid');
   var entity = $(recordId).parent().data('entity');
+  if(recorder){
   recorder.stop();
   recorder.exportWAV(function(blob) {
     var type = 'replyRecord';
@@ -284,6 +295,7 @@ function stopReRecording(recordId){
     $commentContainer.html(drawComments(comments));
     
   });
+}
 }
 
 function publish_edits() {
