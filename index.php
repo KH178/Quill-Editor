@@ -68,16 +68,30 @@
 			</div>
 		</div>
 
-    <div id="myModal" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-          <input onclick="startRecording()" type="button" class="btn btn-primary" value="Record" />
-					<input onclick="stopRecording()" type="button" class="btn btn-primary" data-dismiss="modal" value="Stop" />
-          <!-- <input type="hidden" class="btn btn-default" data-dismiss="modal" value="close"> -->
+    <div id="myModal" class="modal model-container fade" role="dialog">
+      <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center" role="document">
+         <!-- Modal content-->
+          <div class="modal-content recorder-div">
+            <p class="title">Recoder</p>
+            <p class="sub">Click Record to start recording your comment.</p>
+            <p class="sub1">0 Recording...</p>
+            <div class="timer-div">
+            <!-- <span id="hour">00</span> : -->
+            <span class="min">00</span> :
+            <span class="sec">00</span> :
+            <span class="milisec">00</span>
+            </div>
+            <div class="recorder-record-btn">
+              <input onclick="startRecording()" type="button" class="btn btn-primary" value="Record" />
+            </div>
+            <div class="recorder-stop-record-btn">
+              <input type="button" class="btn btn-primary" value="Stop" data-dismiss="modal">
+            </div>
+              <!-- <input onclick="stopRecording()" type="button" class="btn btn-primary" data-dismiss="modal" value="Stop" /> -->
+              <div class="modal-close-btn" data-dismiss="modal" onclick="stopRecording()">X</div>
+          </div>
         </div>
-
       </div>
     </div>  
 
@@ -127,37 +141,37 @@ function stopRecording() {
   $(`#${id}`).find('.sub1').css('display','none');
   $(`#${id}`).find('.recorder-record-btn').css('display','block');
   if(recorder){
-  recorder.stop();
-  recorder.exportWAV(function(blob) {
-  range = quill.getSelection();
-    if (range) {
-      
-      text = quill.getText(range.index, range.length);
-      var type = "record";
-      var $commentContainer = $("#comments-container");
-      var audio_src = window.URL.createObjectURL(blob);
-      var record = new Data(blob, type, by, date, range , text, audio_src)
-      comments.unshift(record);
-      $commentContainer.html(drawComments(comments,entity="comment"));
+    recorder.stop();
+    recorder.exportWAV(function(blob) {
+      range = quill.getSelection();
+        if (range) {
+          
+          text = quill.getText(range.index, range.length);
+          var type = "record";
+          var $commentContainer = $("#comments-container");
+          var audio_src = window.URL.createObjectURL(blob);
+          var record = new Data(blob, type, by, date, range , text, audio_src)
+          comments.unshift(record);
+          $commentContainer.html(drawComments(comments,entity="comment"));
 
-      // comments[key].src.unshift(audio_src);
-      // add marked selection to global list
-      // window.marked_selections.push([window.selection_range, blob]);
-      
-      
-      // $commentContainer.append('<div class="main_container main-comment-container comment-link"><div class="alert-success" id="recording_' + data_index + '" data-index="' + data_index + '"' + 
-      //               'onmouseover="format_selection('+sel_index+', '+sel_length+')"' + 
-      //               'onmouseout="remove_selection_format('+sel_index+', '+sel_length+')">' + 
-      //               '<audio id="audio_' + data_index + '" controls autoplay></audio>' +
-      //               '<i class="comment-link fa fa-comment"></i>' + 
-      //             '</div></div>');
-      // // var data_index = window.marked_selections.length;
-      // var data_index = comments.length - 1;
-      // $('#audio_'+data_index).prop('src', audio_src);
-    }
-  });
+          // comments[key].src.unshift(audio_src);
+          // add marked selection to global list
+          // window.marked_selections.push([window.selection_range, blob]);
+          
+          
+          // $commentContainer.append('<div class="main_container main-comment-container comment-link"><div class="alert-success" id="recording_' + data_index + '" data-index="' + data_index + '"' + 
+          //               'onmouseover="format_selection('+sel_index+', '+sel_length+')"' + 
+          //               'onmouseout="remove_selection_format('+sel_index+', '+sel_length+')">' + 
+          //               '<audio id="audio_' + data_index + '" controls autoplay></audio>' +
+          //               '<i class="comment-link fa fa-comment"></i>' + 
+          //             '</div></div>');
+          // // var data_index = window.marked_selections.length;
+          // var data_index = comments.length - 1;
+          // $('#audio_'+data_index).prop('src', audio_src);
+        }
+    });
+  }
 }
-
 function startReRecording(recordId) {
   var index = $(recordId).parent().data('recordingid');
   var entity = $(recordId).parent().data('entity');
