@@ -1,3 +1,7 @@
+*{
+    font-family: Merriweather;
+}
+
 audio{
     width:100%;
 }
@@ -5,6 +9,26 @@ audio{
 .comment, .reply {
     border-left: 1px solid #e0dada;
 }
+
+.col-sm-8{
+    width:64.3333%;
+}
+
+#comments-container{
+    margin-top:60px;
+}
+
+.ql-snow.ql-toolbar button, .ql-snow .ql-toolbar button {
+    height: 30px;
+    padding: 5px 0px;
+    width: 40px;
+    font-size: 20px;
+}
+
+.ql-toolbar.ql-snow .ql-formats {
+    border-right: 1px solid#a8a8a8;
+}
+
 
 .editor-right{
     position:fixed;
@@ -16,26 +40,80 @@ audio{
 .editor-right span h5{
     text-align:center;
     font-size:20px;
+    border-bottom: 1px solid #a8a8a8;
+    padding-bottom:10px;
+    color:#295caa;
 }
 .editor-right .comment-editor{
     height:90vh;
     /* border:1px solid black; */
-    box-shadow: 0 0 2px 0px;
+    /* box-shadow: 0 0 2px 0px; */
     overflow-y: scroll;
 }
 
 .editor-right .comment-editor .comment_text textarea{
     width:100%;
-    height:50px;
+    box-shadow: 0 0 10px 1px rgba(178, 225, 197, 0.75);
+    border: 1px solid #2e9557;
+    background-color: #ffffff;
+    border-radius: 5px;
+    display: none;
 }
 
 .comment_text{
+    position: relative;
     margin-bottom:16px;
 }
+
 .comment_text i{
     float:right;
     right:0;
     display: none;
+    font-size:22px;
+}
+
+.commentTextArea{
+    position: relative;
+}
+
+.commentTextArea .textIcon{
+    position: absolute;
+    top:5px;
+    left:8px;
+}
+
+.commentTextArea textarea{
+    top:0;
+    left:0;
+    padding:5px 5px 5px 33px;
+}
+
+.postComment{
+    position: absolute;
+    right:5%;
+    display: none;
+}
+
+.textComment{
+    color:#ffffff;
+    font-family: Merriweather;
+    font-size: 14px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 4px 1px rgba(170, 170, 170, 0.75), inset 0 0 5px rgba(0, 88, 35, 0.75);
+    background-color: #2e9557;
+    padding: 5px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cancelComment{
+    margin-right:10px;
+    color: #a09a9a;
+    font-family: Merriweather;
+    font-size: 14px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
 }
 
 .editor-right .audio-editor{
@@ -56,11 +134,12 @@ audio{
     position: fixed;
     width: 82%;
     height: 10%;
-    padding:10px;
+    padding:5px 40px;
     display: flex;
     align-items: center;
-    background-color:#ccc;
     z-index: 999;
+    box-shadow: 0 2px 6px rgba(182, 182, 182, 0.75);
+    background-color: #ffffff;
 }
 
 .editor-continer{
@@ -74,7 +153,7 @@ audio{
     /* border: 1px solid black; */
     background-color:#f1f1f1;
     height: 100vh;
-    padding: 60px 40px 30px;
+    padding: 60px 30px 0px;
     /* margin-top:50px; */
 }
 
@@ -92,6 +171,7 @@ audio{
 .ql-editor{
     padding:30px;
     background-color: white;
+    font-size:16px;
 }
 
 /* Comment link */
@@ -153,90 +233,11 @@ audio{
 }
 
 
-/* Recorder */
 
 
-.vertical-alignment-helper {
-    display:table;
-    height: 100%;
-    width: 100%;
-    pointer-events:none;
-}
-.vertical-align-center {
-    /* To center vertically */
-    display: table-cell;
-    vertical-align: middle;
-    pointer-events:none;
-}
-.modal-content {
-    /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
-    width:inherit;
- max-width:inherit; /* For Bootstrap 4 - to avoid the modal window stretching full width */
-    height:inherit;
-    /* To center horizontally */
-    margin: 0 auto;
-    pointer-events:all;
-}
 
-.recorder-div{
-    max-width: 300px;
-    height: 250px;
-    position: relative;
-    text-align: center;
-    padding: 5px 0;
-}
 
-.recorder-div p{
-    padding-top: 5px;
-    color: #c53e46;
-    font-family: Merriweather;
-    font-size: 18px;
-}
-.recorder-div .sub,
-.recorder-div .sub1
-{
-    font-family: Merriweather;
-    font-size: 20px;
-    width: 90%;
-    margin: 0 auto;
-    line-height: 20px;
-    color: #575757;
-}
-.recorder-div .sub1{
-    font-size: 25px;
-    display: none;
-    height: 45px;
-}
-.recorder-record-btn,
-.recorder-stop-record-btn{
-    width: 90%;
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 20px;
-}
-.recorder-record-btn input, .recorder-record-btn input:hover, .recorder-record-btn input:active, .recorder-record-btn input:visited,
-.recorder-stop-record-btn input, .recorder-stop-record-btn input:hover, .recorder-stop-record-btn input:active, .recorder-stop-record-btn input:visited {
-    width: 100%;
-    border-radius: 20px;
-    background-color: #c53e46 !important;
-}
 
-.recorder-stop-record-btn{
-    display: none;
-}
-.modal-close-btn{
-    position: absolute;
-    right: 5px;
-    top: 2px;
-    cursor: pointer;
-}
-
-.timer-div{
-    font-size: 40px;
-    margin: 18px;
-}
 /* @media screen and (max-width:600px){
 	.link-text{
 		font-size:1.1em;

@@ -21,7 +21,8 @@
 		<div class="container">
 		
 			<!-- end comment button -->
-			<div class="col-sm-7">
+			<div class="col-sm-8">
+        <span class="ql-formats" id="comment_part"></span>
 				<!-- Create the editor container -->
 				<div id="editor">
 					<p>Hello World!</p>
@@ -29,16 +30,21 @@
 					<p><br></p>
 				</div>
 			</div>
-			<div class="col-sm-5">
+			<div class="col-sm-4">
 				<div class="row editor-right">
 					<div class="col-sm-12 comment-editor">
-							<span><h5>Comments</h5></span>
+							<span><h5>Comments Section</h5></span>
 							<span class="" id="error"></span>
 							<div class="comment_text" id="" style="">
-								<textarea id="comment_text" class="" readonly></textarea>
-								<i class="fa fa-check" id="check"></i>
-								<i class="fa fa-close"></i>
-							</div>
+                  <div class="commentTextArea">
+                    <textarea id="comment_text" placeHolder="Write Comment" readonly></textarea>
+                    <span class="textIcon"><i class="fa fa-edit"></i></span>
+                  </div>
+              </div>
+              <div class="postComment">
+                  <span class="cancelComment">Cancel</span>
+                  <span class="textComment" id="check">Post</span>
+              </div>
 							<div>
 								<ul class="list-group" id="comments-container">
 								</ul>
@@ -63,29 +69,15 @@
 		</div>
 
     <div id="myModal" class="modal fade" role="dialog">
-      <div class="vertical-alignment-helper">
-        <div class="modal-dialog vertical-align-center" role="document">
-         <!-- Modal content-->
-          <div class="modal-content recorder-div">
-            <p class="title">Recoder</p>
-            <p class="sub">Click Record to start recording your comment.</p>
-            <p class="sub1">0 Recording...</p>
-            <div class="timer-div">
-            <!-- <span id="hour">00</span> : -->
-            <span class="min">00</span> :
-            <span class="sec">00</span> :
-            <span class="milisec">00</span>
-            </div>
-            <div class="recorder-record-btn">
-              <input onclick="startRecording()" type="button" class="btn btn-primary" value="Record" />
-            </div>
-            <div class="recorder-stop-record-btn">
-              <input type="button" class="btn btn-primary" value="Stop" data-dismiss="modal">
-            </div>
-              <!-- <input onclick="stopRecording()" type="button" class="btn btn-primary" data-dismiss="modal" value="Stop" /> -->
-              <div class="modal-close-btn" data-dismiss="modal" onclick="stopRecording()">X</div>
-          </div>
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <input onclick="startRecording()" type="button" class="btn btn-primary" value="Record" />
+					<input onclick="stopRecording()" type="button" class="btn btn-primary" data-dismiss="modal" value="Stop" />
+          <!-- <input type="hidden" class="btn btn-default" data-dismiss="modal" value="close"> -->
         </div>
+
       </div>
     </div>  
 
@@ -98,77 +90,7 @@
 	<script type="text/javascript" src="js/recorder.js"></script>
 	<script type="text/javascript" src="js/comment.js"></script>
 	<script>
-
-    var x;
-    var startstop = 0;
-		var milisec = 0;
-    var sec = 0; 
-    var min = 0;
-    var hour = 0;
-
-    // function startStop() { /* Toggle StartStop */
-    //   startstop = startstop + 1;
-    //   if (startstop === 1) {
-    //     start();
-    //     document.getElementById("start").innerHTML = "Stop";
-    //   } else if (startstop === 2) {
-    //     document.getElementById("start").innerHTML = "Start";
-    //     startstop = 0;
-    //     stop();
-    //   }
-    // }
-
-    function start(id) {
-      x = setInterval(()=>timer(id), 10);
-    } /* Start */
-
-    function stop(id) {
-      clearInterval(x);
-      milisec = 0;
-      sec = 0; 
-      min = 0;
-      hour = 0;
-      timer(id)
-    } /* Stop */
-
-    function timer(id) {
-  /* Main Timer */
-      miliSecOut = checkTime(milisec);
-      secOut = checkTime(sec);
-      minOut = checkTime(min);
-      // hourOut = checkTime(hour);
-
-      milisec = ++milisec;
-      if (milisec === 100) {
-        milisec = 0;
-        sec = ++sec;
-      }
-      if (sec == 60) {
-        min = ++min;
-        sec = 0;
-      }
-      if (min == 60) {
-        min = 0;
-        hour = ++hour;
-      }
-  
-      $(`#${id}`).find(".milisec").html(miliSecOut);
-      $(`#${id}`).find(".sec").html(secOut);
-      $(`#${id}`).find(".min").html(minOut);
-      // document.getElementById("hour").innerHTML = hourOut;
-      
-  }
-
-  function checkTime(i) {
-  if (i < 10) {
-    i = "0" + i;
-  }
-  return i;
-}
-
-$('#myModal').on('hidden.bs.modal', function () {
-  stopRecording();
-});
+		
 	// Recorder
 var onFail = function(e) {
   console.log('Rejected!', e);
@@ -185,13 +107,7 @@ var onSuccess = function(s) {
 var recorder;
 var audio = document.querySelector('audio');
 
-// let timer = 0;
-let intervalTimer;
 function startRecording() {
-  let id = $(event.target).closest('.modal').attr('id');
-  $(event.target).closest('.modal');
-  console.log($(event.target).closest('.modal').attr('id'));
-  start($(event.target).closest('.modal').attr('id'));
   if (window.selection_range.length > 0) {
     if (navigator.getUserMedia) {
       navigator.getUserMedia({audio: true}, onSuccess, onFail);
@@ -199,10 +115,6 @@ function startRecording() {
       console.log('navigator.getUserMedia not present');
     }
   }
-  $(`#${id}`).find('.recorder-stop-record-btn').css('display','block');
-  $(`#${id}`).find('.sub1').css('display','block');
-  $(`#${id}`).find('.sub').css('display','none');
-  $(`#${id}`).find('.recorder-record-btn').css('display','none');
 }
 
 function stopRecording() {
@@ -242,7 +154,6 @@ function stopRecording() {
       // $('#audio_'+data_index).prop('src', audio_src);
     }
   });
-  }
 }
 
 function startReRecording(recordId) {
@@ -324,10 +235,10 @@ function publish_edits() {
     // [{ header: [1, 2, 3, 4, 5, 6, false] }],
 
     [{ color: [] }, { background: [] }], // dropdown with defaults from theme
-    // [{ font: [] }],
+    // [{ size: ["16px","18px","20px","22px","24px","30px","36px","40px","48px"] }],
     // [{ align: [] }],
 
-    ["clean"] // remove formatting button
+    // ["clean"] // remove formatting button
   ];
   var quill = new Quill('#editor', {
   modules: {

@@ -20,8 +20,9 @@ var range;
 var text;
 var by;
 var $commentContainer = $("#comments-container");
-var comment_button = '<span class="ql-formats"><button type="button" class="ql-clean" id="comment-button"><i class="fa fa-comment"></i></button></span>';
-var record_btn = '<span class="ql-formats"><button type="button" class="ql-clean" id="microphone" data-toggle="modal" data-target="#myModal"><i class="fa fa-microphone"></i></button></span>';
+var qlFormats = '<span class="ql-formats qlComment"></span>'
+var comment_button = '<button type="button" class="ql-clean" id="comment-button"><i class="fa fa-comment"></i></button>';
+var record_btn = '<button type="button" class="ql-clean" id="microphone" data-toggle="modal" data-target="#myModal"><i class="fa fa-microphone"></i></button>';
 
 
 var today = new Date();
@@ -34,8 +35,9 @@ var today = new Date();
     var date = hours + ':' + minutes + ' ' + ampm;
 
 $(document).ready(function(){
-    $('.ql-toolbar').append(comment_button);
-    $('.ql-toolbar').append(record_btn);
+    $('.ql-toolbar').append(qlFormats);
+    $('.qlComment').append(comment_button);
+    $('.qlComment').append(record_btn);
 })
 
 $(document).on('mouseenter', '.comment', function(){
@@ -73,8 +75,9 @@ $(document).on("click", "#comment-button", function() {
             
             if(text){
                 $('.comment_text').show()
-                $('.comment_text').find('textarea').css({'height':'80px'}).focus().removeAttr('readonly','false');
+                $('.comment_text').find('textarea').css({'height':'100px'}).focus().removeAttr('readonly','false').show();
                 $('.comment_text').find('i').show();
+                $('.postComment').show();
             }
         }
         
@@ -302,30 +305,7 @@ $(document).on('click','.recording', function(){
                         '<input onclick="startReRecording(this)" type="button" class="btn btn-primary" value="Re-Record" />'+
                         '<input onclick="stopReRecording(this)" type="button" class="btn btn-primary replyRecord" data-dismiss="modal" value="Stop" data-replyId="" />'+
                     '</div>'+
-                '</div>';
-        
-        content = `<div class="vertical-alignment-helper">
-                        <div class="modal-dialog vertical-align-center" role="document">
-                        <!-- Modal content-->
-                            <div class="modal-content recorder-div">
-                            <p class="title">Recoder</p>
-                            <p class="sub">Click Record to start recording your comment.</p>
-                            <div class="timer-div">
-                            <span class="min">00</span> :
-                            <span class="sec">00</span> :
-                            <span class="milisec">00</span>
-                            </div>
-                            <div class="recorder-record-btn">
-                                <input onclick="startRecording()" type="button" class="btn btn-primary" value="Record" />
-                            </div>
-                            <div class="recorder-stop-record-btn">
-                                <input onclick="stopRecording()" type="button" class="btn btn-primary" value="Stop" data-dismiss="modal">
-                            </div>
-                                <!-- <input onclick="stopRecording()" type="button" class="btn btn-primary" data-dismiss="modal" value="Stop" /> -->
-                                <div class="modal-close-btn" data-dismiss="modal" onclick="stopRecording()">X</div>
-                            </div>
-                        </div>
-                    </div>`
+                '</div>'
     }
     else{
         var id = $(this).parent().parent().parent().data('index');
@@ -335,7 +315,7 @@ $(document).on('click','.recording', function(){
                         '<input onclick="startReRecording(this)" type="button" class="btn btn-primary" value="Re-Record" />'+
                         '<input onclick="stopReRecording(this)" type="button" class="btn btn-primary replyRecord" data-dismiss="modal" value="Stop" data-replyId="" />'+
                     '</div>'+
-                '</div>'        
+                '</div>'
     }
        
     var recordData = $(this).data('target');
