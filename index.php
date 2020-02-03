@@ -93,6 +93,8 @@
     <div id="myModal1" class="modal fade model-container" role="dialog">
         
     </div>
+
+
     
 	</body>
 	<script type="text/javascript" src="js/recorder.js"></script>
@@ -250,12 +252,14 @@ function stopRecording(e) {
 }
 
 function startReRecording(recordId) {
-  var index = $(recordId).parent().data('recordingid');
-  var entity = $(recordId).parent().data('entity');
+  var index = $(recordId).closest('.recorder-div').data('recordingid');
+  var entity = $(recordId).closest('.recorder-div').data('entity');
   let id = $(recordId).closest('.model-container').attr('id');
-  console.log(id);
-  start(id)
+  console.log(index);
+  start(id);
+  console.log($(`#${id}`).find('.recorder-record-btn'));
   
+  // if(recorder){
   $(`#${id}`).find('.recorder-stop-record-btn').css('display','block');
   $(`#${id}`).find('.sub1').css('display','block');
   $(`#${id}`).find('.sub').css('display','none');
@@ -273,12 +277,14 @@ function startReRecording(recordId) {
       console.log('navigator.getUserMedia not present');
     }
   }
+// } 
 }
 
 function stopReRecording(recordId){
-  var index = $(recordId).parent().data('recordingid');
-  var entity = $(recordId).parent().data('entity');
-  if(recorder){
+  var index = $(recordId).closest('.recorder-div').data('recordingid');
+  var entity = $(recordId).closest('.recorder-div').data('entity');
+  let id = $(recordId).closest('.model-container').attr('id');
+  stop(id)
   recorder.stop();
   recorder.exportWAV(function(blob) {
     var type = 'replyRecord';
@@ -295,7 +301,6 @@ function stopReRecording(recordId){
     $commentContainer.html(drawComments(comments));
     
   });
-}
 }
 
 function publish_edits() {
