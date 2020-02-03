@@ -153,11 +153,90 @@ audio{
 }
 
 
+/* Recorder */
 
 
+.vertical-alignment-helper {
+    display:table;
+    height: 100%;
+    width: 100%;
+    pointer-events:none;
+}
+.vertical-align-center {
+    /* To center vertically */
+    display: table-cell;
+    vertical-align: middle;
+    pointer-events:none;
+}
+.modal-content {
+    /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
+    width:inherit;
+ max-width:inherit; /* For Bootstrap 4 - to avoid the modal window stretching full width */
+    height:inherit;
+    /* To center horizontally */
+    margin: 0 auto;
+    pointer-events:all;
+}
 
+.recorder-div{
+    max-width: 300px;
+    height: 250px;
+    position: relative;
+    text-align: center;
+    padding: 5px 0;
+}
 
+.recorder-div p{
+    padding-top: 5px;
+    color: #c53e46;
+    font-family: Merriweather;
+    font-size: 18px;
+}
+.recorder-div .sub,
+.recorder-div .sub1
+{
+    font-family: Merriweather;
+    font-size: 20px;
+    width: 90%;
+    margin: 0 auto;
+    line-height: 20px;
+    color: #575757;
+}
+.recorder-div .sub1{
+    font-size: 25px;
+    display: none;
+    height: 45px;
+}
+.recorder-record-btn,
+.recorder-stop-record-btn{
+    width: 90%;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 20px;
+}
+.recorder-record-btn input, .recorder-record-btn input:hover, .recorder-record-btn input:active, .recorder-record-btn input:visited,
+.recorder-stop-record-btn input, .recorder-stop-record-btn input:hover, .recorder-stop-record-btn input:active, .recorder-stop-record-btn input:visited {
+    width: 100%;
+    border-radius: 20px;
+    background-color: #c53e46 !important;
+}
 
+.recorder-stop-record-btn{
+    display: none;
+}
+.modal-close-btn{
+    position: absolute;
+    right: 5px;
+    top: 2px;
+    cursor: pointer;
+}
+
+.timer-div{
+    font-size: 40px;
+    margin: 18px;
+}
 /* @media screen and (max-width:600px){
 	.link-text{
 		font-size:1.1em;

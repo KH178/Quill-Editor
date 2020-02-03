@@ -302,7 +302,30 @@ $(document).on('click','.recording', function(){
                         '<input onclick="startReRecording(this)" type="button" class="btn btn-primary" value="Re-Record" />'+
                         '<input onclick="stopReRecording(this)" type="button" class="btn btn-primary replyRecord" data-dismiss="modal" value="Stop" data-replyId="" />'+
                     '</div>'+
-                '</div>'
+                '</div>';
+        
+        content = `<div class="vertical-alignment-helper">
+                        <div class="modal-dialog vertical-align-center" role="document">
+                        <!-- Modal content-->
+                            <div class="modal-content recorder-div">
+                            <p class="title">Recoder</p>
+                            <p class="sub">Click Record to start recording your comment.</p>
+                            <div class="timer-div">
+                            <span class="min">00</span> :
+                            <span class="sec">00</span> :
+                            <span class="milisec">00</span>
+                            </div>
+                            <div class="recorder-record-btn">
+                                <input onclick="startRecording()" type="button" class="btn btn-primary" value="Record" />
+                            </div>
+                            <div class="recorder-stop-record-btn">
+                                <input onclick="stopRecording()" type="button" class="btn btn-primary" value="Stop" data-dismiss="modal">
+                            </div>
+                                <!-- <input onclick="stopRecording()" type="button" class="btn btn-primary" data-dismiss="modal" value="Stop" /> -->
+                                <div class="modal-close-btn" data-dismiss="modal" onclick="stopRecording()">X</div>
+                            </div>
+                        </div>
+                    </div>`
     }
     else{
         var id = $(this).parent().parent().parent().data('index');
@@ -312,7 +335,7 @@ $(document).on('click','.recording', function(){
                         '<input onclick="startReRecording(this)" type="button" class="btn btn-primary" value="Re-Record" />'+
                         '<input onclick="stopReRecording(this)" type="button" class="btn btn-primary replyRecord" data-dismiss="modal" value="Stop" data-replyId="" />'+
                     '</div>'+
-                '</div>'
+                '</div>'        
     }
        
     var recordData = $(this).data('target');
