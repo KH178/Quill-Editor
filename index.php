@@ -207,7 +207,9 @@ function startRecording() {
 
 function stopRecording() {
   let id = $(event.target).closest('.modal').attr('id');
+  console.log($(event.target).closest('.modal').attr('id'));
   stop($(event.target).closest('.modal').attr('id'));
+  
   $(`#${id}`).find('.recorder-stop-record-btn').css('display','none');
   $(`#${id}`).find('.sub').css('display','block');
   $(`#${id}`).find('.sub1').css('display','none');
