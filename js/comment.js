@@ -329,7 +329,7 @@ $(document).on('click','.recording', function(){
     }
     else{
         var id = $(this).parent().parent().parent().data('index');
-        data_entity = 'reply';
+        data_entity = 'reply'; 
         // content =   '<div class="modal-dialog">'+
         //             '<div class="modal-content" data-recordingid="'+id+'" data-entity="'+data_entity+'">'+
         //                 '<input onclick="startReRecording(this)" type="button" class="btn btn-primary" value="Re-Record" />'+

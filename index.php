@@ -274,7 +274,7 @@ function startReRecording(recordId) {
     if (navigator.getUserMedia) {
       navigator.getUserMedia({audio: true}, onSuccess, onFail);
     } else {
-      console.log('navigator.getUserMedia not present');
+      console.log('navigator.getUserMedia not present'); 
     }
   }
 // } 
